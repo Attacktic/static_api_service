@@ -4,15 +4,11 @@ var data = require('../data/data.js');
 var activedata = require('../logic/logic.js');
 var user = require('../logic/user.js');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-router.get('/users', function(req, res, next) {
-  res.json(data);
-});
-router.get('/active_users', function(req, res, next) {
-  res.json(activedata);
+router.get('/:url', function(req, res, next) {
+  if (req.params.url === "active_users"){
+  res.json(activedata);}
+  else if (req.params.url === "users"){
+  res.json(data) ;}
 });
 
 router.get('/users/:id', function(req, res, next) {

@@ -1,10 +1,19 @@
 $(document).ready(function(){
-
+  var loc;
+  if (location.pathname.substring(location.pathname.lastIndexOf("/")+1, location.pathname.length) === "active_users.html"){
+    loc = "active_users/";
+  }
+  else {loc = "users/";}
+  $('#back').hide();
   function loadToPage(all){
     for (var i = 0; i < all.length; i++) {
     var userdiv = document.createElement("div");
     var name = document.createElement("div");
-    name.id = "names";
+    if (all.active === 1){
+      alert("cool");
+      name.style.color = "green";
+    }
+    name.className = "names";
     name.innerHTML = all[i].name;
     userdiv.appendChild(name);
     $('#allusers').append(userdiv);
@@ -12,6 +21,7 @@ $(document).ready(function(){
   }
 
   function profilePage(data){
+    $('#back').show();
     var name = document.createElement("span");
     name.innerHTML = data.first_name + " " + data.last_name;
     var active = document.createElement("span");
@@ -34,7 +44,7 @@ $(document).ready(function(){
   }
 
   $.ajax({
-    url: "http://localhost:3000/users",
+    url: "http://localhost:3000/" + loc,
     success: function(data){
       var all = [];
       for (var i in data){
@@ -45,17 +55,22 @@ $(document).ready(function(){
           active: data[i].user_data.active
         });
       }
-      loadToPage(all)
+      loadToPage(all);
     }
   });
+  $('#back').on("click", function(){
+    $('#back').hide();
+    location.reload();
+  });
 
-  $(document).on("click", "#names", function(){
+  $(document).on("click", ".names", function(){
+    $('#usertext').hide();
     $('#allusers').empty();
-    var last = this.innerHTML.substring(this.innerHTML.indexOf(" ")+1, this.innerHTML.length)
+    var last = this.innerHTML.substring(this.innerHTML.indexOf(" ")+1, this.innerHTML.length);
     $.ajax({
-      url: "http://localhost:3000/users/" + last,
+      url: "http://localhost:3000/" + loc + last,
       success: function(data){
-        profilePage(data.user_data)
+        profilePage(data.user_data);
       }
     });
   });

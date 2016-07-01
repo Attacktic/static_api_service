@@ -2,6 +2,7 @@ main{
   width: 100vw;
   height: 90vh;
   padding-top: 10vh;
+  position: relative;
 }
 
 #allusers{
@@ -13,15 +14,6 @@ main{
   height: 60%;
   background-color: #FAFAFA;
   position: relative;
-}
-
-#names{
-  width: 100%;
-  height: 3vh;
-  background-color: white;
-  margin-bottom: 10px;
-  color: black;
-  cursor: pointer;
 }
 
 .userblock{
@@ -41,10 +33,18 @@ main{
   background-color: #FAFAFA;
 }
 #allusers div{
-  width: 45%;
+  width: 50%;
   height: 3vh;
   margin-bottom: 1vh;
   display: inline-block;
+  border-radius: 5px;
+}
+.names{
+  width: 40vw;
+  height: 3vh;
+  background-color: white;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
 
 #allusers span{
@@ -57,7 +57,7 @@ main{
 }
 
 #allusers span:first-of-type{
-  color: blue;
+  color: #808080;
   margin-top: 0;
   font-size: 2em;
   width: 100%;
@@ -71,4 +71,17 @@ main{
   right: 2vw;
   top: 4vh;
   position: absolute;
+}
+
+#back{
+  cursor: pointer;
+  width: 2vw;
+  height: 4vh;
+  background-color: #FAFAFA;
+  text-align: center;
+  position: absolute;
+  left: 16vw;
+  top: 15vh;
+  color: black;
+  font-size: 2em;
 }
